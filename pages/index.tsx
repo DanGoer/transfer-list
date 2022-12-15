@@ -2,10 +2,22 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-const listLeft: string[] = ["JS", "React", "TailWind", "HTML"];
-const listRight: string[] = ["TS", "Next", "CSS", "Node"];
+const listLeft: { name: string; marked: boolean }[] = [
+  { name: "JS", marked: false },
+  { name: "React", marked: false },
+  { name: "Tailwind", marked: false },
+  { name: "HTML", marked: false },
+];
+const listRight: { name: string; marked: boolean }[] = [
+  { name: "TS", marked: false },
+  { name: "Next", marked: false },
+  { name: "CSS", marked: false },
+  { name: "SQL", marked: false },
+];
 
 export default function Home() {
+  const oneToTheRight: () => void = () => {};
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,18 +31,24 @@ export default function Home() {
         <section>
           <ul>
             {listLeft.map((item, i) => (
-              <li key={listLeft[i]}>{item}</li>
+              <li key={listLeft[i]}>
+                <p>{item.name}</p>
+                {item.marked ? <button>x</button> : <button>x</button>}
+              </li>
             ))}
           </ul>
           <div>
-            <button></button>
+            <button onClick={() => oneToTheRight()}></button>
             <button></button>
             <button></button>
             <button></button>
           </div>
           <ul>
             {listRight.map((item, i) => (
-              <li key={listRight[i]}>{item}</li>
+              <li key={listLeft[i]}>
+                <p>{item.name}</p>
+                {item.marked ? <button>x</button> : <button>x</button>}
+              </li>
             ))}
           </ul>
         </section>
