@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { use, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 const listLeft: { name: string; marked: boolean }[] = [
@@ -19,6 +19,7 @@ const listRight: { name: string; marked: boolean }[] = [
 
 export default function Home() {
   const [listOnLeft, setListOnLeft] = useState(listLeft);
+  const [listOnRight, setListOnRight] = useState(listRight);
 
   const oneToTheRight: () => void = () => {};
 
@@ -26,11 +27,16 @@ export default function Home() {
   const oneToTheLeft: () => void = () => {};
   const allToTheLeft: () => void = () => {};
 
-  const callMarked: (i: any) => void = (i) => {
+  const callMarkedLeft: (i: any) => void = (i) => {
     const newList = listOnLeft;
     newList[i].marked = !newList[i].marked;
     setListOnLeft([...newList]);
-    console.log(JSON.stringify(listLeft));
+  };
+
+  const callMarkedRight: (i: any) => void = (i) => {
+    const newList = listOnRight;
+    newList[i].marked = !newList[i].marked;
+    setListOnRight([...newList]);
   };
 
   return (
@@ -49,9 +55,9 @@ export default function Home() {
               <li key={i}>
                 <p>{item.name}</p>
                 {item.marked ? (
-                  <button onClick={() => callMarked(i)}>x</button>
+                  <button onClick={() => callMarkedLeft(i)}>x</button>
                 ) : (
-                  <button onClick={() => callMarked(i)}>o</button>
+                  <button onClick={() => callMarkedLeft(i)}>o</button>
                 )}
               </li>
             ))}
@@ -66,7 +72,11 @@ export default function Home() {
             {listRight.map((item, i) => (
               <li key={i}>
                 <p>{item.name}</p>
-                {item.marked ? <button>x</button> : <button>o</button>}
+                {item.marked ? (
+                  <button onClick={() => callMarkedRight(i)}>x</button>
+                ) : (
+                  <button onClick={() => callMarkedRight(i)}>o</button>
+                )}
               </li>
             ))}
           </ul>
