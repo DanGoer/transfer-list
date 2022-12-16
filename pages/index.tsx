@@ -21,10 +21,24 @@ export default function Home() {
   const [listOnLeft, setListOnLeft] = useState(listLeft);
   const [listOnRight, setListOnRight] = useState(listRight);
 
-  const oneToTheRight: () => void = () => {};
+  const markedToTheRight: () => void = () => {
+    const array = listOnRight;
+    const newArray = listOnLeft;
+    newArray.forEach((i, index) => {
+      if (i.marked === true) {
+        array.push(i);
+        newArray.splice(index, 1);
+      }
+    });
+
+    setListOnRight([...array]);
+    setListOnLeft([...newArray]);
+
+    console.log(JSON.stringify(array));
+  };
 
   const allToTheright: () => void = () => {};
-  const oneToTheLeft: () => void = () => {};
+  const markedToTheLeft: () => void = () => {};
   const allToTheLeft: () => void = () => {};
 
   const callMarkedLeft: (i: any) => void = (i) => {
@@ -63,13 +77,13 @@ export default function Home() {
             ))}
           </ul>
           <div>
-            <button onClick={() => oneToTheRight()}>oneToTheRight</button>
+            <button onClick={() => markedToTheRight()}>oneToTheRight</button>
             <button>allToTheright</button>
             <button>oneToTheLeft</button>
             <button>allToTheLeft</button>
           </div>
           <ul>
-            {listRight.map((item, i) => (
+            {listOnRight.map((item, i) => (
               <li key={i}>
                 <p>{item.name}</p>
                 {item.marked ? (
