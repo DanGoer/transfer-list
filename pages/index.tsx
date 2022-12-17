@@ -33,12 +33,24 @@ export default function Home() {
 
     setListOnRight([...array]);
     setListOnLeft([...newArray]);
+  };
 
-    console.log(JSON.stringify(array));
+  const markedToTheLeft: () => void = () => {
+    const array = listOnRight;
+    const newArray = listOnLeft;
+    array.forEach((i, index) => {
+      if (i.marked === true) {
+        newArray.push(i);
+        array.splice(index, 1);
+      }
+    });
+
+    setListOnRight([...newArray]);
+    setListOnLeft([...array]);
   };
 
   const allToTheright: () => void = () => {};
-  const markedToTheLeft: () => void = () => {};
+
   const allToTheLeft: () => void = () => {};
 
   const callMarkedLeft: (i: any) => void = (i) => {
@@ -79,7 +91,7 @@ export default function Home() {
           <div>
             <button onClick={() => markedToTheRight()}>oneToTheRight</button>
             <button>allToTheright</button>
-            <button>oneToTheLeft</button>
+            <button onClick={() => markedToTheLeft()}>oneToTheLeft</button>
             <button>allToTheLeft</button>
           </div>
           <ul>
