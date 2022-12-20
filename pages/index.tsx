@@ -49,7 +49,14 @@ export default function Home() {
     setListOnLeft([...array]);
   };
 
-  const allToTheright: () => void = () => {};
+  const allToTheright: () => void = () => {
+    const array = listOnRight;
+    const newArray = listOnLeft;
+    const mergedArray = array.concat(newArray);
+    const deletedArray: any = [];
+    setListOnRight([...mergedArray]);
+    setListOnLeft(deletedArray);
+  };
 
   const allToTheLeft: () => void = () => {};
 
@@ -90,7 +97,7 @@ export default function Home() {
           </ul>
           <div>
             <button onClick={() => markedToTheRight()}>oneToTheRight</button>
-            <button>allToTheright</button>
+            <button onClick={() => allToTheright()}>allToTheright</button>
             <button onClick={() => markedToTheLeft()}>oneToTheLeft</button>
             <button>allToTheLeft</button>
           </div>
