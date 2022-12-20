@@ -58,7 +58,14 @@ export default function Home() {
     setListOnLeft(deletedArray);
   };
 
-  const allToTheLeft: () => void = () => {};
+  const allToTheLeft: () => void = () => {
+    const array = listOnRight;
+    const newArray = listOnLeft;
+    const mergedArray = newArray.concat(array);
+    const deletedArray: any = [];
+    setListOnLeft([...mergedArray]);
+    setListOnRight(deletedArray);
+  };
 
   const callMarkedLeft: (i: any) => void = (i) => {
     const newList = listOnLeft;
@@ -99,7 +106,7 @@ export default function Home() {
             <button onClick={() => markedToTheRight()}>oneToTheRight</button>
             <button onClick={() => allToTheright()}>allToTheright</button>
             <button onClick={() => markedToTheLeft()}>oneToTheLeft</button>
-            <button>allToTheLeft</button>
+            <button onClick={() => allToTheLeft()}>allToTheLeft</button>
           </div>
           <ul>
             {listOnRight.map((item, i) => (
